@@ -97,51 +97,6 @@ suspend-sink alsa_output.platform-odroid_sound_card.5.analog-stereo 1" >> /etc/p
 	fi
 }
 
-enable_ir() {
-	# setup modules
-	if [ $board == "exynos5" ]; then
-		msgbox "Please note, that this option was made for ODROID XU4 Cloudshell and may not work with other setups."
-		options="options gpioplug_ir_recv gpio_nr=24 active_low=1"
-		if [ `cat /etc/modprobe.d/odroid-cloudshell.conf | grep -ci -m1 "^$options"` -eq 0 ]; then
-				echo "$options" >> /etc/modprobe.d/odroid-cloudshell.conf
-		fi
-		module="gpio-ir-recv"
-		if [ `cat /etc/modules | grep -ci -m1 "^$module"` -eq 0 ]; then
-				echo "$module" >> /etc/modules
-				modprobe $module
-		fi
-	elif [ $board == "odroidc2" ] || [ $board == "odroidc1" ]; then
-		if [ `cat /etc/modules | grep -ci -m1 '^meson_ir'` -eq 0 ]; then
-			echo -e "meson_ir" >> /etc/modules
-			modprobe meson_ir
-		fi
-	fi
-	# install lirc
-	[ `dpkg --get-selections | grep -ci -m1 '^lirc'` -eq 0 ] && apt-get install -y lirc
-
-	#Stop complaints during startup since not using the Kodi remote
-	mv /etc/lirc/lircd.conf.d/devinput.lircd.conf ~
-	
-	# install systemd script for IR
-	cat <<_EOF_>> /etc/systemd/system/odroid-ir.service
-[Unit]
-Description=Odroid IR
-
-[Service]
-Type=forking
-ExecStartPre=/bin/bash -c 'mkdir -p /var/run/lirc'
-ExecStart=/usr/sbin/lircd --output=/run/lirc/lircd --driver=default --device=/dev/lirc0 --uinput
-
-[Install]
-WantedBy=multi-user.target
-_EOF_
-	systemctl daemon-reload
-	msgbox "ODROID IR configured systemd script \"odroid-ir\"."
-	systemctl enable odroid-ir.service
-	systemctl start odroid-ir.service
-
-}
-
 install_xorg() {
 	cat <<_EOT_>> /root/.xsession
 #!/bin/bash
@@ -425,7 +380,6 @@ dpkg-reconfigure locales
 dpkg-reconfigure tzdata
 
 change_hostname
-enable_ir
 CC=$(whiptail --backtitle "ODROID audio device" --yesno "Will you be using an ODROID audio device (Stereo Bonnet or HiFi Shield)?" 0 0 3>&1 1>&2 2>&3)
     if [ $? -eq 0 ]; then
 		odroid_dac
