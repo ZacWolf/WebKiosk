@@ -7,7 +7,7 @@ https://www.instructables.com/id/Web-Kiosk/
 
 It is based on the ODROID C2 device:
 
-![ODROID C2](images/c2.png)!
+![ODROID C2](images/c2.gif)!
 
 ### Login: root/odroid
 
