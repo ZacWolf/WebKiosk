@@ -149,7 +149,7 @@ _EOT_
 
 install_tomcat(){
 	apt-get install default-jdk tomcat8 -y
-	sed -i s/localhost/http:\/\/localhost:8080/g /home/$USERNAME/.xsession
+	sed -i s/http:\/\/localhost/http:\/\/localhost:8080/g /home/$USERNAME/.xsession
 	cat <<_EOT_>> /var/lib/tomcat8/webapps/ROOT/index.html
 <html>
 <head></head>

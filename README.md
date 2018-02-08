@@ -46,17 +46,18 @@ Power up the machine; you'll see a series of startup output. The screen will bla
 ```bash
 apt-get update && apt-get dist-upgrade -y
 ```
+About mid-way through you'll see a warning about rebuilding the kernel. Just hit ENTER to OK. When the process is complete enter the command:
 
 ```bash
-apt-get install net-tools -y && ifconfig
+apt-get install net-tools -y && clear && ifconfig eth0
 ```
-(write down IP address and mac-address for SSH login)
+(write down the IP address and mac-address (the HEX decimals after the word "ether"). You'll need the IP address for SSH login)
 
 ```bash
 reboot
 ```
 
-### Login: root/odroid
+### SSH Login: root/odroid
 
 ```bash
 wget -O setup.sh https://raw.githubusercontent.com/ZacWolf/WebKiosk/master/setup.sh && chmod 700 ./setup.sh && ./setup.sh
