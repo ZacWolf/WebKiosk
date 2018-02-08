@@ -59,8 +59,7 @@ reboot
 ### Login: root/odroid
 
 ```bash
-wget -O setup.sh https://raw.githubusercontent.com/ZacWolf/WebKiosk/master/setup.sh
-chmod 700 setup.sh && ./setup.sh
+wget -O setup.sh https://raw.githubusercontent.com/ZacWolf/WebKiosk/master/setup.sh && chmod 700 ./setup.sh && ./setup.sh
 ```
 
 Disconnect power
