@@ -2,8 +2,14 @@
 ## WebKiosk using ODROID C2
 ![Web Kiosk](images/kiosk.png)!
 
+This is the code repo for a Web Kiosk Instructable at:
+https://www.instructables.com/id/Web-Kiosk/
 
-login: root/odroid
+It is based on the ODROID C2 device:
+
+![ODROID C2](images/c2.png)!
+
+### Login: root/odroid
 
 ```bash
 apt-get update && apt-get dist-upgrade -y
@@ -83,7 +89,7 @@ Connect touch screen display
 
 Connect power
 
-###SSH login: root/{newpasword}
+### SSH login: root/{newpasword}
 
 `wget -O setupkiosk.sh https://raw.githubusercontent.com/ZacWolf/WebKiosk/master/setupkiosk.sh`
 
