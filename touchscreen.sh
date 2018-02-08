@@ -1,6 +1,10 @@
 #!/bin/bash
 # Setup Touchscreen
 
+msgbox() {	# $1 is the msg
+	whiptail --backtitle "$TITLE" --msgbox "$1" 0 0 0
+}
+
 setup_vu5(){
 	sed -i 's/^#\ setenv\ m\ \"800x480p60hz\"/setenv\ m\ \"800x480p60hz\"/g' /boot/boot.ini
 	sed -i "s/#\ setenv\ m_bpp\ \"24\"/setenv\ m_bpp\ \"24\"/" /boot/boot.ini
