@@ -16,6 +16,6 @@ chmod 700 .\touchscreen.sh && .\touchscreen.sh
 wget -O setupkiosk.sh https://raw.githubusercontent.com/ZacWolf/WebKiosk/master/setupkiosk.sh
 chmod 700 .\setupkiosk.sh
 
-read -p "The system will shutdown after you press [ENTER].\nIf you chose a touchscreen monitor, unplug the regular monitor, and plugin the touchscreen monitor after the system shuts down."
+read -p "The system will shutdown after you press [ENTER].\nIf you chose a touchscreen monitor, unplug the regular monitor, and plugin the touchscreen monitor after the system shuts down and you've removed power."
 
 shutdown -h now

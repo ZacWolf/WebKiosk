@@ -1,5 +1,5 @@
 # WebKiosk
-## WebKiosk using ODROID C2
+
 ![Web Kiosk](images/kiosk.png)!
 
 This is the code repo for a Web Kiosk Instructable at:
@@ -13,10 +13,10 @@ The image that comes on the eMMC card from HardKernel is totally bloated for use
 
 Download the ~93MB C2.img.xz image file:
 
-https://oph.mdrjr.net/meveric/images/Stretch/
-http://fuzon.co.uk/meveric/images/Stretch/ [MIRROR]
+* https://oph.mdrjr.net/meveric/images/Stretch/
+* http://fuzon.co.uk/meveric/images/Stretch/ [MIRROR]
 
-### Writing the image
+## Writing the image
 ![Web Kiosk](images/eMMC2SD.jpg)!
 
 Now, download a tool called [Etcher](https://etcher.io/) which will allow you to write the image file you downloaded above to the eMMC card.
@@ -25,10 +25,10 @@ To do this, use the eMMC2SD card adapter, and insert into a microSD card reader 
 
 When you run Etcher you first select the image you downloaded, and then select the microSD card reader, then hit Flash. 
 
-*NOTE*
-_When selecting a drive in step 2, make sure it is your microSD card reader, because if you select another driver, Etcher will overwrite that drive, and the data can't be recovered! *I won't be responsible for lost data, so read the instructions on the Etcher download page*._
+**NOTE**
+_When selecting a drive in step 2, make sure it is your microSD card reader, because if you select another driver, Etcher will overwrite that drive, and the data can't be recovered! **I won't be responsible for lost data, so read the instructions on the Etcher download page**._
 
-*NOTE2*
+**NOTE2**
 _On windows, when you insert the eMMC2SD card adapter, you may get popups about the need to format the drive. IGNORE these dialogs. Just hit cancel, and close any FileManager windows. The same will happen when Etcher starts, and when it finishes. Just close any Windows dialogs that popup._
 
 
@@ -39,6 +39,7 @@ For this next step you will need to plug-in a regular HDMI monitor NOT the touch
 Make sure you have an ethernet cable attached to your ODROID
 Power up the machine; you'll see a series of startup output. The screen will blank, which is normal as it expands the image onto the full space of the eMMC drive, and the screen will then refill with the startup output, and then blank to the login screen.
 
+## Configure the kiosk
 
 ### Login: root/odroid
 
@@ -54,6 +55,8 @@ ifconfig
 ```bash
 reboot
 ```
+
+### Login: root/odroid
 
 ```bash
 wget -O setup.sh https://raw.githubusercontent.com/ZacWolf/WebKiosk/master/setup.sh
@@ -73,7 +76,7 @@ setupkiosk.sh
 ```
 
 
-#### Optional:
+#### Optional: but your kiosk user won't need root privs...
 
 ```bash
 apt-get install sudo -y

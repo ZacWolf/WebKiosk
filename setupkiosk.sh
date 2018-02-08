@@ -149,8 +149,9 @@ _EOT_
 
 
 install_tomcat(){
-		sed -i s/localhost/http:\/\/localhost:8080/g /home/$USERNAME/.xsession
-		cat <<_EOT_>> /var/lib/tomcat8/webapps/ROOT/index.html
+	apt-get install default-jdk tomcat8 -y
+	sed -i s/localhost/http:\/\/localhost:8080/g /home/$USERNAME/.xsession
+	cat <<_EOT_>> /var/lib/tomcat8/webapps/ROOT/index.html
 <html>
 <head></head>
 <body>
@@ -159,7 +160,9 @@ install_tomcat(){
 		<td nowrap><h1>Tomcat8:</h1>
 			Tomcat installed at: <br />
 			<code>/usr/share/tomcat8</code> <br />
+			Conf:<br />
 			<code>/etc/tomcat8</code> <br />
+			Doc root:<br />
 			<code>/var/lib/tomcat8/webapps/ROOT</code>
 		</td>
 		<td width="100%" valign="center">
@@ -174,7 +177,6 @@ install_tomcat(){
 </body>
 </html>
 _EOT_
-		DEFAULT_URL=http://localhost:8080
 		msgbox "Installed Tomcat"
 }
 
@@ -186,8 +188,8 @@ install_ngix(){
 <body>
 <table width="100%">
 	<tr>
-		<td nowrap><h3>ngix:</h3>
-			ngix installed at: <br />
+		<td nowrap><h1>ngix:</h1>
+			ngix doc root at: <br />
 			<code>/var/www/nginx-default/</code>
 		</td>
 		<td width="100%" valign="center">
@@ -195,8 +197,6 @@ install_ngix(){
 			<h2><a href="http://google.com">Google</h2>
 			<h2><a href="http://www.pandora.com">Pandora</h2>
 			<h2><a href="http://amazon.com">Amazon</h2>
-			<h2></h2>
-			<h2><a href="chrome://gpu">GPU</a></h2>
 			</center>
 		</td>
 	</tr>
