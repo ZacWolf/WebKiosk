@@ -48,7 +48,7 @@ apt-get update && apt-get dist-upgrade -y
 ```
 
 ```bash
-ifconfig
+apt-get install net-tools -y && ifconfig
 ```
 (write down IP address and mac-address for SSH login)
 
