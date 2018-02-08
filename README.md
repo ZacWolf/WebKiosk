@@ -51,7 +51,7 @@ sed -i "s/#\ setenv\ m_bpp\ \"24\"/setenv\ m_bpp\ \"24\"/" /boot/boot.ini
 
 VU5/7
 ```bash
-sed -i 's/^#\ setenv\ m\ \"800x480p60hz\"/setenv\ m\ \"1024x600p60hz\"/g' /boot/boot.ini
+sed -i 's/^#\ setenv\ m\ \"800x480p60hz\"/setenv\ m\ \"800x480p60hz\"/g' /boot/boot.ini
 ```
 
 VU7+
