@@ -5,17 +5,27 @@
 
 login: root/odroid
 
-`apt-get update && apt-get dist-upgrade -y`
+```bash
+apt-get update && apt-get dist-upgrade -y
+```
 
-`ifconfig`
+```bash
+ifconfig
+```
 	(write down IP address and mac-address for SSH login)
 
-`reboot`
+```bash
+reboot
+```
 
 ### SSH login: root/odroid
-`passwd`
+```bash
+passwd
+```
 
-`echo "set paste\nset mouse=r" > .vimrc`
+```bash
+echo "set paste\nset mouse=r" > .vimrc
+```
 
 Reset all the defaults
 
@@ -23,7 +33,7 @@ Reset all the defaults
 sed -i 's/^setenv\ m\ /#\ setenv\ m\ /g' /boot/boot.ini
 sed -i "s/^setenv\ m_bpp\ /#\ setenv\ m_bpp\ /g" /boot/boot.ini
 sed -i 's/^setenv\ vout\ /#\ setenv\ vout\ /g' /boot/boot.ini
-`
+```
 
 Set the new settings
 
@@ -55,11 +65,17 @@ sed -i 's/^#setenv\ m\ \"1920x1080p60hz\"/setenv\ m\ \"1920x1080p60hz\"/g' /boot
 ```
 
  
-`apt-get install net-tools dbus d-feet less curl bzip2 lsb-compat lsb-release fortune fortunes -y`
+```bash
+apt-get install net-tools dbus d-feet less curl bzip2 lsb-compat lsb-release fortune fortunes -y
+```
 
-`wget -O .bashrc https://raw.githubusercontent.com/ZacWolf/WebKiosk/master/.bashrc`
+```bash
+wget -O .bashrc https://raw.githubusercontent.com/ZacWolf/WebKiosk/master/.bashrc
+```
 
-`shutdown -h now`
+```bash
+shutdown -h now
+```
 
 Disconnect power
 
