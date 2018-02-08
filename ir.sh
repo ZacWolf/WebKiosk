@@ -2,7 +2,7 @@
 
 apt-get install lirc -y
 
-mv /etc/lirc/lircd.conf.d/devinput.lircd.conf ~
+mv /etc/lirc/lircd.conf.d/devinput.lircd.conf /etc/lirc/lircd.conf.d/devinput.lircd.dist
 
 echo -e "#/etc/modprobe.d/lirc.conf\noptions lirc_odroid gpio_out_pin=249 softcarrier=1 invert=1\n" > /etc/modprobe.d/lirc.conf
 
@@ -77,6 +77,8 @@ fi
 systemctl daemon-reload
 systemctl enable lircd.service
 
+clear
+read -p "The system needs to be restarted, press [ENTER]."
 reboot
 
 
