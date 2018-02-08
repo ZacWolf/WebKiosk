@@ -41,7 +41,7 @@ CC=$(whiptail --backtitle "Touchscreen" --menu "Monitor Menu" 0 0 1 --nocancel -
                 "1" "Setup VU5/7" \
                 "2" "Setup VU7+" \
                 "3" "Setup VU8" \
-				"4" "Setup for non-touch 1080p monitor"
+				"4" "Setup for non-touch 1080p monitor" \
                 3>&1 1>&2 2>&3)
 	case "$CC" in
 			"1")    setup_vu5;;
