@@ -50,7 +50,7 @@ odroid_dac(){
 		echo "set-default-sink alsa_output.platform-odroid_sound_card.5.analog-stereo
 suspend-sink alsa_output.platform-odroid_sound_card.5.analog-stereo 1" >> /etc/pulse/default.pa
 	fi
-	msgbox "ODROID DAC support enabled"
+	#msgbox "ODROID DAC support enabled"
 	echo "pcm.!default {
 	type hw;
 	card 1;
@@ -77,10 +77,10 @@ _EOT_
 install_gpu() {
 	if [ ! -z $fbdev ]; then
 			apt-get install -y mali450-fbdev-odroid
-			msgbox "Installed mali450-fbdev-odroid driver"
+			#msgbox "Installed mali450-fbdev-odroid driver"
 	else
 			apt-get install -y mali450-odroid
-			msgbox "Installed mali450-odroid driver"
+			#msgbox "Installed mali450-odroid driver"
 	fi
 }
 
@@ -91,7 +91,7 @@ install_ddx() {
 	else
 		apt-get install -y xf86-video-fbturbo-odroid libump-odroid
 		cp -f /usr/local/share/setup-odroid/xorg/c2/fbturbo/xorg.conf /etc/X11
-		msgbox "Installed xf86-video-fbturbo-odroid driver"
+		#msgbox "Installed xf86-video-fbturbo-odroid driver"
 	fi
 }
 
@@ -101,15 +101,15 @@ install_backlightpwm(){ # currently unsupported
 echo 234 | tee export
 echo out | tee /sys/class/gpio/gpio234/direction
 echo 0 | tee /sys/class/gpio/gpio234/value
-chown  $USERNAME:$USERNAME /sys/class/gpio/gpio234/value
+chown  chrome:chrome /sys/class/gpio/gpio234/value
 echo 214 | tee export
 echo out | tee /sys/class/gpio/gpio214/direction
 echo 0 | tee /sys/class/gpio/gpio214/value
-chown  $USERNAME:$USERNAME /sys/class/gpio/gpio214/value
+chown  chrome:chrome /sys/class/gpio/gpio214/value
 exit 0
 _EOT_
-	echo -e "$CHROMIMUM &" >> /home/$USERNAME/.xsession
-	tee -a /home/$USERNAME/.xsession  <<_EOT_
+	echo -e "$CHROMIMUM &" >> /home/chrome/.xsession
+	tee -a /home/chrome/.xsession  <<_EOT_
 backlight_stat = "On"	
 while true
 do
@@ -133,23 +133,25 @@ _EOT_
 
 
 config_xsession(){
-	cat <<_EOT_>> /home/$USERNAME/.xsession
+	cat <<_EOT_>> /home/chrome/.xsession
 #!/bin/bash
 export DISPLAY=:0
 xset +dpms
 xset dpms 30 60 120
 xset s off
 rm -f /home/chrome/.cache/chromium/Default/Cache/*
+sed -i 's/"exited_cleanly":false/"exited_cleanly":true/' /home/chrome/.config/chromium/'Local State'
+sed -i 's/"exited_cleanly":false/"exited_cleanly":true/; s/"exit_type":"[^"]\+"/"exit_type":"Normal"/' ~/.config/chromium/Default/Preferences
 _EOT_
-	echo $CHROMIMUM >> /home/$USERNAME/.xsession
-	chown $USERNAME:$USERNAME /home/$USERNAME/.xsession
-	chmod 755 /home/$USERNAME/.xsession
+	echo $CHROMIMUM >> /home/chrome/.xsession
+	chown chrome:chrome /home/chrome/.xsession
+	chmod 755 /home/chrome/.xsession
 }
 
 
 install_tomcat(){
 	apt-get install default-jdk tomcat8 -y
-	sed -i s/http:\/\/localhost/http:\/\/localhost:8080/g /home/$USERNAME/.xsession
+	sed -i s/http:\/\/localhost/http:\/\/localhost:8080/g /home/chrome/.xsession
 	cat <<_EOT_>> /var/lib/tomcat8/webapps/ROOT/index.html
 <html>
 <head></head>
@@ -212,7 +214,7 @@ kiosk_URL_setother(){
 	NU=$(whiptail --backtitle "Set the the default URL for your kiosk:" --inputbox "Default URL" 0 40 "$CU" 3>&1 1>&2 2>&3)
 
 	if [ $? -eq 0 ]; then
-		sed -i -e "s/http:\/\/localhost/http:\/$NU/g" /home/$USERNAME/.xsession
+		sed -i -e "s/http:\/\/localhost/http:\/$NU/g" /home/chrome/.xsession
 	fi
 }
 
@@ -234,7 +236,6 @@ CC=$(whiptail --backtitle "Default Kiosk URL" --menu "WebServer Menu" 0 0 1 --no
 # START SCRIPT
 #========================================================
 
-USERNAME=chrome
 CHROMIUM="/usr/bin/chromium --kiosk --no-first-run --disable-translate --disable-infobars --use-gl=egl --ignore-gpu-blacklist --num-raster-threads=4 --enable-zero-copy --enable-floating-virtual-keyboard http://localhost"
 
 check_deb-multimedia
@@ -258,15 +259,15 @@ install_ddx
 apt-get install nodm chromium -y
 ln -sf /usr/lib/aarch64-linux-gnu/libGLESv2.so /usr/lib/chromium/libGLESv2.so
 ln -sf /usr/lib/aarch64-linux-gnu/libEGL.so /usr/lib/chromium/libEGL.so
-useradd -m $USERNAME
-echo -e "$USERNAME\n$USERNAME" | passwd $USERNAME
-adduser $USERNAME video
-adduser $USERNAME audio
-adduser $USERNAME adm
-adduser $USERNAME cdrom
-adduser $USERNAME input
-adduser $USERNAME tty
-sed -i -e "s/root/$USERNAME/g" /etc/default/nodm
+useradd -m chrome
+echo -e "chrome\nchrome" | passwd chrome
+adduser chrome video
+adduser chrome audio
+adduser chrome adm
+adduser chrome cdrom
+adduser chrome input
+adduser chrome tty
+sed -i -e "s/root/chrome/g" /etc/default/nodm
 kiosk_URL
 config_xsession
 
