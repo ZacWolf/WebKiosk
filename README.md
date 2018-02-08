@@ -91,7 +91,9 @@ Connect power
 
 ### SSH login: root/{newpasword}
 
-`wget -O setupkiosk.sh https://raw.githubusercontent.com/ZacWolf/WebKiosk/master/setupkiosk.sh`
+```bash
+wget -O setupkiosk.sh https://raw.githubusercontent.com/ZacWolf/WebKiosk/master/setupkiosk.sh
+```
 
 ```bash
 chmod 700 setup.sh
