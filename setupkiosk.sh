@@ -72,7 +72,6 @@ xset s off
 xterm
 _EOT_
 	apt-get install xserver-xorg xinit x11-xserver-utils xterm -y
-	cp /usr/local/share/setup-odroid/xorg/c2/mali/xorg.conf /etc/X11/
 }
 
 install_gpu() {
@@ -91,7 +90,7 @@ install_ddx() {
 		continue
 	else
 		apt-get install -y xf86-video-fbturbo-odroid libump-odroid
-		cp /usr/local/share/setup-odroid/xorg/c2/fbturbo/xorg.conf /etc/X11
+		cp -f /usr/local/share/setup-odroid/xorg/c2/fbturbo/xorg.conf /etc/X11
 		msgbox "Installed xf86-video-fbturbo-odroid driver"
 	fi
 }
@@ -111,6 +110,7 @@ exit 0
 _EOT_
 	echo -e "$CHROMIMUM &" >> /home/$USERNAME/.xsession
 	tee -a /home/$USERNAME/.xsession  <<_EOT_
+backlight_stat = "On"	
 while true
 do
 sleep 1
@@ -135,14 +135,13 @@ _EOT_
 config_xsession(){
 	cat <<_EOT_>> /home/$USERNAME/.xsession
 #!/bin/bash
-backlight_stat = "On"
 export DISPLAY=:0
 xset +dpms
 xset dpms 30 60 120
 xset s off
 rm -f /home/chrome/.cache/chromium/Default/Cache/*
 _EOT_
-	echo -e "$CHROMIMUM" >> /home/$USERNAME/.xsession
+	echo $CHROMIMUM >> /home/$USERNAME/.xsession
 	chown $USERNAME:$USERNAME /home/$USERNAME/.xsession
 	chmod 755 /home/$USERNAME/.xsession
 }
@@ -236,7 +235,7 @@ CC=$(whiptail --backtitle "Default Kiosk URL" --menu "WebServer Menu" 0 0 1 --no
 #========================================================
 
 USERNAME=chrome
-CHROMIUM=/usr/bin/chromium --kiosk --no-first-run --disable-translate --disable-infobars --use-gl=egl --ignore-gpu-blacklist --num-raster-threads=4 --enable-zero-copy --enable-floating-virtual-keyboard http://localhost
+CHROMIUM="/usr/bin/chromium --kiosk --no-first-run --disable-translate --disable-infobars --use-gl=egl --ignore-gpu-blacklist --num-raster-threads=4 --enable-zero-copy --enable-floating-virtual-keyboard http://localhost"
 
 check_deb-multimedia
 
