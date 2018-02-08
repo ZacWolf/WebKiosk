@@ -218,7 +218,7 @@ kiosk_URL_setother(){
 }
 
 kiosk_URL(){
-CC=$(whiptail --backtitle "Default Kiosk URL" --menu "WebServer Menu" 0 0 1 --nocancel -ok-button "Select one..."\
+CC=$(whiptail --backtitle "Default Kiosk URL" --menu "WebServer Menu" 0 0 1 --nocancel --ok-button "Select one..." \
                 "1" "Install Tomcat (Java Server)" \
                 "2" "Install nGIX (Basic webserver)" \
                 "3" "Set a specific URL" \

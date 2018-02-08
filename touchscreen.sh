@@ -37,7 +37,7 @@ sed -i 's/^setenv\ m\ /#\ setenv\ m\ /g' /boot/boot.ini
 sed -i "s/^setenv\ m_bpp\ /#\ setenv\ m_bpp\ /g" /boot/boot.ini
 sed -i 's/^setenv\ vout\ /#\ setenv\ vout\ /g' /boot/boot.ini
 
-CC=$(whiptail --backtitle "Touchscreen" --menu "Monitor Menu" 0 0 1 --nocancel -ok-button "Select one..."\
+CC=$(whiptail --backtitle "Touchscreen" --menu "Monitor Menu" 0 0 1 --nocancel --ok-button "Select one..." \
 "1" "Setup VU5-7" \
 "2" "Setup VU7plus" \
 "3" "Setup VU8" \
