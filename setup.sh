@@ -6,7 +6,7 @@ passwd
 
 echo "set paste\nset mouse=r" > .vimrc
 
-apt-get install net-tools dbus d-feet less curl bzip2 lsb-compat lsb-release fortune fortunes -y
+apt-get install dbus d-feet less curl bzip2 lsb-compat lsb-release fortune fortunes -y
 
 wget -O .bashrc https://raw.githubusercontent.com/ZacWolf/WebKiosk/master/.bashrc
 
