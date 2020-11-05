@@ -108,7 +108,7 @@ echo 0 | tee /sys/class/gpio/gpio214/value
 chown  chrome:chrome /sys/class/gpio/gpio214/value
 exit 0
 _EOT_
-	echo -e "$CHROMIMUM &" >> /home/chrome/.xsession
+	echo -e "$CHROMIUM &" >> /home/chrome/.xsession
 	tee -a /home/chrome/.xsession  <<_EOT_
 backlight_stat = "On"	
 while true
@@ -143,7 +143,7 @@ rm -f /home/chrome/.cache/chromium/Default/Cache/*
 sed -i 's/"exited_cleanly":false/"exited_cleanly":true/' /home/chrome/.config/chromium/'Local State'
 sed -i 's/"exited_cleanly":false/"exited_cleanly":true/; s/"exit_type":"[^"]\+"/"exit_type":"Normal"/' ~/.config/chromium/Default/Preferences
 _EOT_
-	echo $CHROMIMUM >> /home/chrome/.xsession
+	echo $CHROMIUM >> /home/chrome/.xsession
 	chown chrome:chrome /home/chrome/.xsession
 	chmod 755 /home/chrome/.xsession
 }
